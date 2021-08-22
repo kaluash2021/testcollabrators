@@ -1,62 +1,265 @@
 #%RAML 1.0
 title: craft_online_shopping
+description: Craft Rest API Documentation
+version: 1.0
 types:
-  product: !include DataTypes/product.raml
-securitySchemes:
-  basic: !include Security/basicAuth.raml
-traits:
-  response: !include Traits/response.raml
-/product:
-  description: get all products {returns jsaon array}
+  productDataType: !include Datatypes/product.raml
+/products:
+  description: get list of all products
   get:
     queryParameters:
       product_id:
         type: integer
-        description: the id of the product
+        description: id of the product
         required: false
-        example: 8987
+        example: 7788
       name:
         type: string
-        description: the name of the product
-        maxLength: 10
-        minLength: 2
-        example: Hp
-      
+        description: name of the product
+        maxLength: 8
+        minLength: 3
+        required: false
+        example: Lenovo
     headers:
       connection-type:
       session:
-        description: connection session is stored
+        description: connection sesssion is stored
         type: string
         required: false
     responses:
       200:
         body:
           application/json:
-            example: !include examples/products.raml
-
-  is:
-    response
-              
+            type: productDataType
+            example: !include examples/product.raml
+      404:
+        body:
+          application/json:
+            example:
+              {
+                "message": "Not found"
+              }
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "message": "Server error"
+              }           
   /{product_id}:
-    description: gets one product filtered by ID hence we can't give the same example as products
+    description: Get specfic product by id
+    get:
+      description: basic http status respones
+      responses:
+        200:
+          body:
+            application/json:
+              type: productDataType
+              example: !Include examples/product.raml
+                 
+        404:
+          body:
+            application/json:
+              examples:
+                {
+                "message": "Not found"
+              }
+        500:
+          body:
+            application/json:
+              example:
+                {
+                "message": "Server error"
+              }
+                
+/users:
+  description: create user information
+  post:
+    body:
+      application/json:
+        example:
+          {
+               "username": "Tman",
+               "useremail": "anitse12"
+          }
+  
+
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              [{
+                "user_id": 44,
+                "username": "Tman"
+                
+              },
+              {
+                "user_id": 45,
+                "username": "john"
+                
+              }]
+
+      404:
+        body:
+          application/json:
+            example:
+                {
+                "message": "Not found"
+               }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                "message": "Server error"
+              }
+
+ 
+/orders:
+  description: orders are created by user
+  post:
+    body:
+      application/json:
+        example:
+         {
+           "user_id": "21",
+           "product_name": "Hp",
+           "productid": "99"
+         }
+
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              [{
+                "order_id": 54,
+                "userid": 21,
+                "discountid": 0001,
+                "adressid": "750,TX",
+                "amount": 6000,
+                "status": "ordered"
+
+              },
+              {
+                "order_id": 55,
+                "userid": 21,
+                "discountid": 0001,
+                "adressid": "950,NY",
+                "amount": 8000,
+                "status": "ordered"
+          
+              }]
+           
+              
+      404:
+        body:
+          application/json:
+            example:
+                {
+                "message": "Not found"
+               }
+      500:
+          body:
+            application/json:
+              example:
+                {
+                "message": "Server error"
+              }       
+
+/categories:
+  get:
+    description: Get list of products by category
+    queryParameters:
+      catagoryname:
+        type: string
+        required: True
+        example: "Computers"
+      category_id:
+        type: integer
+        required: True
+        example: 1
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              [{
+                "categoryid": 100,
+                "name": "Laptops"
+              },
+              {
+                "categoryid": 101,
+                "name": "mobiles"
+              },
+              {
+                "categoryid": 102,
+                "name": "TV"
+              }]
+      404:
+        body:
+          application/json:
+            example:
+              {
+                "message": "Not found"
+               }
+      500:
+        body:
+          application/json:
+            example:
+              {
+                "message": "Server error"
+               }
+        
+  /{catagory_id}:
+    description: Get a specifc product by categoryid
     get:
       responses:
         200:
           body:
             application/json:
-              type: product
-              example: !include examples/product.raml
-    is:
-      response            
+              example:
+                
+                {
+                    "categoryid": 102,
+                    "name": "TV"
+                }
+
+       404:
+        body:
+          application/json:
+            example:
+                {
+                "message": "Not found"
+                }
+       500:
+        body:
+          application/json:
+            example:
+               {
+                "message": "Server error"
+                }  
+                
+
+
+               
+                     
+
+                
+                
+      
+   
+   
+           
+        
+          
+
   
-                
-/user:
-  post:
-
-/order:
-  post:
-
-/category:
-  get:
     
-                
+
+
+    
+  
+    
+  
