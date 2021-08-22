@@ -1,0 +1,14 @@
+#%RAML 1.0 Library
+usage: collection of all API fragements
+types:
+  user: !include Datatype/user.raml
+  order: !include Datatype/order.raml
+  category: !include Datatype/category.raml
+  product: !include Datatype/product.raml
+securitySchemes:
+  Basic: !include security/basicAuth.raml 
+  # auth: !include security/oath.raml 
+traits:
+  collection: !include 404and500.raml
+resourceTypes:
+  Resource: !include resourceType/postResource.raml

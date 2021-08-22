@@ -1,0 +1,131 @@
+#%RAML 1.0
+title: craft_online_shop
+uses:
+  lib: library.raml
+/products:
+  description: get all list of product
+  get:
+    queryParameters:
+      prodact_id:
+        type: integer
+        description: id of prodact
+        required: false
+        example: 4020
+      name:
+        type: string
+        description: product name
+        maxLength: 12
+        minLength: 2
+        example: Hp
+    headers:
+      connection-type:
+      session:
+        description: connection sission is stored
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: lib.product[]
+            example:
+               !include Examples/products.raml             
+  is:
+   - lib.collection     
+  /{product_id}:
+    description: get specific product by id
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: lib.product
+              example:
+               !include Examples/product.raml
+      is:
+       - lib.collection
+/orders:
+  get:
+    is:
+      - lib.collection
+  post:
+    body:
+      application/json:
+        type: lib.order[]
+        example:
+          !include Examples/orders.raml      
+  type:
+    lib.Resource:
+      exampleReferance1: 
+       {
+        "message": "product is orderd"
+       }                         
+  /{order_id}:
+    get:
+      is:
+        - lib.collection
+    post:
+      body:
+        application/json:
+          type: lib.order
+          example:
+            !include Examples/order.raml
+    type:
+      lib.Resource:
+        exampleReferance1: 
+         {
+        "message": "orderd is ready"  
+        }                                                                             
+/users:
+  post:
+    body:
+      application/json:
+        type: lib.user[]
+        example:
+          !include Examples/users.raml      
+  type:
+    lib.Resource:
+      exampleReferance1: 
+       {
+        "userId":34
+       }
+  /{user_id}:
+    post:
+      body:
+        application/json:
+          type: lib.user
+          example:
+            !include Examples/user.raml
+    type:
+      lib.Resource:
+        exampleReferance1:
+          {
+            "user_id": 45
+          }
+/catagorys: 
+ get:
+   responses:
+     200:
+       body:
+         application/json:
+           type: lib.category[]
+           example:
+             !include Examples/categorys.raml
+   is:
+    - lib.collection
+ /{categoryId}:
+   get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: lib.category
+            example:
+              !include Examples/category.raml
+    is:
+      - lib.collection  
+        
+
+        
+        
+    

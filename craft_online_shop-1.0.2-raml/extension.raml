@@ -1,0 +1,51 @@
+#%RAML 1.0 Extension
+extends: craft_online_shop.raml
+description: for admins
+/products:
+  get:
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              [
+              {
+                "message": "product uploded suc"
+              }
+              ]
+  delete:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                "message": "product removed suc"
+              }
+  /{productId}:
+    get:
+    post:
+    put:
+    delete:
+/orders:
+  get:
+  post:
+  put:
+  delete:
+/users:
+  get:
+  post:
+  put:
+  delete:
+  /{userId}:
+    get:
+    post:
+    put:
+    delete: 
+/category:
+  get:
+  post:
+  put:
+  delete:
+    

@@ -1,0 +1,23 @@
+#%RAML 1.0 Overlay
+extends: craft_online_shop.raml
+usage: spainsh users
+documentation:
+  - title: introduction
+    content: this doc is spainsh users only
+/products:
+  description: product result have get http method
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "product_id": 4,
+                  "catagory_id": 2,
+                "name": "Hp",
+                "vido_url": "www.hp.com",
+                "description": "cor i7",
+                "price": 2000
+              }
+/users:
