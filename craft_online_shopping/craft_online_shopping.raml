@@ -1,0 +1,62 @@
+#%RAML 1.0
+title: craft_online_shopping
+types:
+  product: !include DataTypes/product.raml
+securitySchemes:
+  basic: !include Security/basicAuth.raml
+traits:
+  response: !include Traits/response.raml
+/product:
+  description: get all products {returns jsaon array}
+  get:
+    queryParameters:
+      product_id:
+        type: integer
+        description: the id of the product
+        required: false
+        example: 8987
+      name:
+        type: string
+        description: the name of the product
+        maxLength: 10
+        minLength: 2
+        example: Hp
+      
+    headers:
+      connection-type:
+      session:
+        description: connection session is stored
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example: !include examples/products.raml
+
+  is:
+    response
+              
+  /{product_id}:
+    description: gets one product filtered by ID hence we can't give the same example as products
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: product
+              example: !include examples/product.raml
+    is:
+      response            
+  
+                
+/user:
+  post:
+
+/order:
+  post:
+
+/category:
+  get:
+    
+                

@@ -1,0 +1,21 @@
+#%RAML 1.0 Overlay
+extends: craft_online_shopping.raml
+documentation:
+  - title: Catching up with lectures api doc
+    content: this is all about overlays documentation for craft shopping rest api
+/product: 
+  description: get list of all products
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                 "productid": 1,
+                "categoryid": 13,
+                "name": "Hp",
+                "description": "cor I 7",
+                "video url": "www.hp.com",
+                "price": 7000 
+              }
