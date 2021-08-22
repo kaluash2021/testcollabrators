@@ -1,0 +1,33 @@
+#%RAML 1.0
+title: Craft-online-shopping
+description: Rest API Documentation
+version: 1.0
+uses:
+  lib: productLibrary.raml
+resourceTypes:
+  postResource: !include resource/postResource.raml
+/products:
+ type:
+  lib.productResource:
+      exampleRefernce1: 
+                 [{
+                 "productid": 12,
+                 "categoryid": 15,
+                 "name": "dell pc",
+                 "description": "core I 7",
+                 "video_url": "http://url",
+                 "price": 7000
+                 }]
+  is:
+    [notfound]
+
+  /{product}:
+    get:
+      
+      
+
+      
+
+    
+
+

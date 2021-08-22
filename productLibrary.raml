@@ -1,0 +1,11 @@
+#%RAML 1.0 Library
+types:
+  products: !include productDataType.raml
+
+traits:
+  notfound: !include productTraits.raml
+
+resourceTypes:
+  productResource: !include productResourceType.raml
+securitySchemes:
+  security: !include productSecurityScheme.raml
