@@ -1,9 +1,17 @@
 #%RAML 1.0 Extension
 extends: craft_online_shopping.raml
-usage: for admin tasks
+usage: for admin purpose
 /products:
   get:
   post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              {
+                
+              }
   delete:
   /{product_id}:
     get:
@@ -13,6 +21,7 @@ usage: for admin tasks
 /users:
   get:
   post:
-  put:
   delete:
+
+      
     

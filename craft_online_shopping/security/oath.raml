@@ -1,0 +1,21 @@
+#%RAML 1.0 SecurityScheme
+type: OAuth 2.0
+description: used token for validation
+describedBy:
+  headers:
+     Authorization:
+       description: user send a valid token
+       type: integer
+  queryParameters:
+      access_token:
+        description: valid token
+        type: integer
+  responses:
+      403:
+         description: credienetial is required
+      401:
+         description: token is incorrect or invalid
+         
+
+
+  

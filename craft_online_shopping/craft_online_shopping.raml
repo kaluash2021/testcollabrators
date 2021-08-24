@@ -4,6 +4,16 @@ description: Craft Rest API Documentation
 version: 1.0
 types:
   productDataType: !include Datatypes/product.raml
+  userdatatype: !include Datatypes/user.raml
+  orderdatatype: !include Datatypes/order.raml
+  categorydatatype: !include Datatypes/category.raml
+securitySchemes:
+  basic: !include security/basicauth.raml
+traits:
+  responses: !include traits/respones.raml
+resourceTypes:
+  resource: !include resources/postResource.raml
+  
 /products:
   description: get list of all products
   get:
@@ -31,21 +41,9 @@ types:
         body:
           application/json:
             type: productDataType
-            example: !include examples/product.raml
-      404:
-        body:
-          application/json:
-            example:
-              {
-                "message": "Not found"
-              }
-      500:
-        body:
-          application/json:
-            example:
-              {
-                "message": "Server error"
-              }           
+            example: !include examples/products.raml
+    is:
+      - responses         
   /{product_id}:
     description: Get specfic product by id
     get:
@@ -57,67 +55,34 @@ types:
               type: productDataType
               example: !Include examples/product.raml
                  
-        404:
-          body:
-            application/json:
-              examples:
-                {
-                "message": "Not found"
-              }
-        500:
-          body:
-            application/json:
-              example:
-                {
-                "message": "Server error"
-              }
+      is:
+        - responses
                 
 /users:
   description: create user information
   post:
     body:
       application/json:
-        example:
+        
+        example: 
           {
                "username": "Tman",
                "useremail": "anitse12"
           }
   
-
-    responses:
-      201:
-        body:
-          application/json:
-            example:
-              [{
-                "user_id": 44,
-                "username": "Tman"
-                
-              },
+  type:
+    resource:
+      exampleReference1:
               {
-                "user_id": 45,
-                "username": "john"
-                
-              }]
-
-      404:
-        body:
-          application/json:
-            example:
-                {
-                "message": "Not found"
-               }
-      500:
-          body:
-            application/json:
-              example:
-                {
-                "message": "Server error"
+                "msg": "uid generated"
               }
+          
+  is:
+    - responses
 
  
 /orders:
-  description: orders are created by user
+  
   post:
     body:
       application/json:
@@ -127,46 +92,15 @@ types:
            "product_name": "Hp",
            "productid": "99"
          }
-
-    responses:
-      200:
-        body:
-          application/json:
-            example:
-              [{
-                "order_id": 54,
-                "userid": 21,
-                "discountid": 0001,
-                "adressid": "750,TX",
-                "amount": 6000,
-                "status": "ordered"
-
-              },
-              {
-                "order_id": 55,
-                "userid": 21,
-                "discountid": 0001,
-                "adressid": "950,NY",
-                "amount": 8000,
-                "status": "ordered"
-          
-              }]
-           
-              
-      404:
-        body:
-          application/json:
-            example:
-                {
-                "message": "Not found"
-               }
-      500:
-          body:
-            application/json:
-              example:
-                {
-                "message": "Server error"
-              }       
+  type:
+    resource:
+      exampleReference1:
+        {
+          "msg": "order placed"
+        }
+         
+  is:
+    - responses
 
 /categories:
   get:
@@ -178,39 +112,17 @@ types:
         example: "Computers"
       category_id:
         type: integer
-        required: True
+        required: false
         example: 1
     responses:
       200:
         body:
           application/json:
-            example:
-              [{
-                "categoryid": 100,
-                "name": "Laptops"
-              },
-              {
-                "categoryid": 101,
-                "name": "mobiles"
-              },
-              {
-                "categoryid": 102,
-                "name": "TV"
-              }]
-      404:
-        body:
-          application/json:
-            example:
-              {
-                "message": "Not found"
-               }
-      500:
-        body:
-          application/json:
-            example:
-              {
-                "message": "Server error"
-               }
+            type: categorydatatype
+            example: !Include  examples/categories.raml
+               
+    is:
+      - responses
         
   /{catagory_id}:
     description: Get a specifc product by categoryid
@@ -219,28 +131,12 @@ types:
         200:
           body:
             application/json:
-              example:
+              type: categorydatatype
+              example: !Include examples/category.raml
                 
-                {
-                    "categoryid": 102,
-                    "name": "TV"
-                }
-
-       404:
-        body:
-          application/json:
-            example:
-                {
-                "message": "Not found"
-                }
-       500:
-        body:
-          application/json:
-            example:
-               {
-                "message": "Server error"
-                }  
                 
+      is:
+        - responses
 
 
                

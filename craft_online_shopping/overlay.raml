@@ -1,9 +1,9 @@
 #%RAML 1.0 Overlay
 extends: craft_online_shopping.raml
 documentation:
-  - title: Catching up with lectures api doc
-    content: this is all about overlays documentation for craft shopping rest api
-/product: 
+  - title: Документ интерфейса прикладного программирования
+    content: craft-онлайн покупки 
+/products:
   description: get list of all products
   get:
     responses:
@@ -12,10 +12,20 @@ documentation:
           application/json:
             example:
               {
-                 "productid": 1,
-                "categoryid": 13,
-                "name": "Hp",
-                "description": "cor I 7",
-                "video url": "www.hp.com",
-                "price": 7000 
+                [{
+              "productid": 12,
+              "categoryid": 15,
+              "name": "DELL PC",
+              "description": "CORE I 5",
+              "video_url": "https://DELL.com",
+              "price": 3000
+             },
+             {
+              "productid": 10,
+              "categoryid": 55,
+              "name": "LENOVO PC",
+              "description": "CORE I 5",
+              "video_url": "https://LEN.com",
+              "price": 4000
+             }] 
               }
