@@ -1,0 +1,132 @@
+#%RAML 1.0
+title: online_shoping
+version: 1.0.0
+protocols:
+  - HTTP
+mediaType: 
+- application/json
+uses:
+  lib: library.raml
+/products:
+  description: get all list of product
+  get:
+    queryParameters:
+      product_id:
+        type: integer
+        description: id of the product
+        required: false
+        example: 5678
+      name:
+        type: string
+        description: name of product
+        required: false
+        example: dell
+        maxLength: 8
+        minLength: 3
+      category_id:
+        type: integer
+        description: category id of the product
+        required: false
+        example: 2121
+    headers:
+      session:
+        description: connection session is stored
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            type: lib.prodatatype[]
+            example:
+              !include Example/products.raml  
+    is:
+      - lib.response 
+  /{product_id}:
+    description: get product by id 
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: lib.prodatatype
+              example:
+                !include Example/product.raml
+    is:
+      - lib.response
+/users:
+  post: 
+   body:
+     application/json:
+       type: lib.userdatatype[]
+       example:
+         !include Example/users.raml 
+  type:
+    lib.Resource: 
+           exampleReferance2:
+             {
+               uid: 3421
+             }
+  /{user_id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Example/user.raml
+    is:
+      - lib.response                      
+/orders:
+  post:
+    body:
+      application/json:
+        type: lib.orderdatatype[]
+        example:
+          !include Example/orders.raml
+  type:
+    lib.Resource:
+      exampleReferance2:
+        {
+          "message": "order is succses"
+        }
+     
+  /{order_id}:
+    post:
+      body:
+        application/json:
+          type: lib.orderdatatype
+          example:
+            !include Example/order.raml
+    type:
+      lib.Resource:
+        exampleReferance2: 
+         {
+          order_id: 4089,
+          user_id: 4671,
+          name: "dell",
+          date: "8-11-2021"
+        }
+/categorys:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: lib.catdatatype[]
+            example:
+              !include Example/categorys.raml
+    is:
+      - lib.response
+  /{category_id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              type: lib.catdatatype
+              example:
+                !include Example/category.raml
+    is:
+      - lib.response
+    

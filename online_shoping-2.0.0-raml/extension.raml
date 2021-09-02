@@ -1,0 +1,174 @@
+#%RAML 1.0 Extension
+extends: online_shoping.raml
+usage: for admin tasks
+/products:
+  get:
+    description: get all products
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include Example/products.raml
+  post:
+    description: product is cerated
+    responses:
+      201:
+        body:
+          application/json:
+            type: lib.prodatatype[]
+            example:
+              !include Example/products.raml
+  delete:
+    description: delete products 
+    responses:
+     200:
+       body:
+         application/json:
+           example:
+             {
+               "message": "deleted succ"
+             }                   
+  /{product_id}:
+    get:
+      description: list product by id
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Example/product.raml
+    post:
+      description: insert new product
+      responses:
+        201:
+          body:
+            application/json:
+              type: lib.prodatatype
+              example:
+                !include Example/product.raml           
+    delete:
+      description: delete product 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  "message": "delete succes"
+                }                
+/orders:
+  get:
+    description: list all orders
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include Example/orders.raml
+  post:
+    description: insert new orders
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              !include Example/orders.raml
+  put:
+    description: update orders
+    responses:
+      204:
+        body:
+          application/json:
+            example:
+              [{
+              order_id: 5567,
+              user_id: 2121,
+              name: "dell",
+              date: "6-12-2021"
+              }]
+  delete:
+    description: delete orders
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+             {
+               "message": "orders is deleted"
+             }
+  /{order_id}:
+    get:
+    post:
+    put:
+    delete:
+/users:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include Example/users.raml
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              !include Example/users.raml
+  put:
+  delete:
+    responses:
+            200:
+              body:
+                application/json:
+                    example:
+                        {
+                          "mes": "deleted"
+                        }   
+  /{user_id}:
+    get:
+    post:
+    put:
+    delete:
+/categorys:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              !include Example/categorys.raml
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              !include Example/categorys.raml
+  put:
+    responses:
+      204:
+        body:
+          application/json:
+            example:
+              [{
+                "name": "laptop",
+                "category_id": 4321
+              }]
+  delete:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                "mes": "delete suc"
+              }
+  /{category_id}:
+    get:
+    post:
+    put:
+    delete:
+      

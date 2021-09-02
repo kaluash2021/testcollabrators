@@ -1,0 +1,172 @@
+#%RAML 1.0 Overlay
+usage: ለአማረኛ ተናጋሪ
+extends: online_shoping.raml
+documentation:
+  - title: api doc
+    content: this doc is all about online shoping rest api
+/products:
+  description: get all products
+  get:
+    queryParameters:
+      product_id:
+        type: integer
+        description: id of product
+        required: false
+        example: 2112
+      name:
+        type: string
+        description: name of the product
+        required: false
+        example: MAC
+    headers:
+      session:
+        description: connection session is stored
+        type: string
+        required: false
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+             [
+              {
+                "product_id": 12,
+                "name": "Hp",
+                "category_id": 4321,
+                "description": "cor i 5",
+                "video_url": "www.Hp.com",
+                "price": 4000
+              },
+              {
+                "product_id": 22,
+                "name": "dell",
+                "category_id": 4321,
+                "description": "cor i 3",
+                "video_url": "www.dell.com",
+                "price": 3000 
+              },
+
+              {
+                "product_id": 32,
+                "name": "phone",
+                "category_id": 4343,
+                "description": "iphone pro",
+                "video_url": "www.iphonr.com",
+                "price": 2000 
+              } 
+              ]
+  /{product_id}:
+    get:
+      description: get product by id
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+               {
+                "product_id": 120,
+                "name": "Hp",
+                "category_id": 3421,
+                "description": "cor i 3",
+                "video_url": "www.Hp.com",
+                "price": 4000
+                }
+/orders:
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              [
+              {
+              order_id: 4567,
+              user_id: 4321,
+              name: "Hp",
+              date: "6-12-2021"
+            },
+            {
+              order_id: 4567,
+              user_id: 4321,
+              name: "Hp",
+              date: "6-12-2021"
+            }
+              ]
+  /{order_id}:
+    post:
+      responses:
+        201:
+          body:
+            application/json:
+              example:
+                {
+                  order_id: 4567,
+                  user_id: 4321,
+                  name: "Hp",
+                  date: "6-12-2021"
+                }
+/users:
+  post:
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              [
+              {
+               username: "samson",
+               email: "sami21@gmail.com"
+              },
+              {
+               username: "davd",
+               email: "davd12@yahoo.com"
+              },
+              {
+               username: "alex",
+               email: "alex2@gmail.com"
+              }
+              ]
+  /{user_id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  username: "alex",
+                  email: "alex2@gmail.com"
+                }
+/categorys:
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              [
+                {
+                  "name": "laptop",
+                  "category_id": 4321
+                },
+
+                {
+                  "name": "phone",
+                  "category_id": 1234
+                },
+                {
+                  "name": "shose",
+                  "category_id": 4567
+                }
+              ]
+  /{category_id}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                  "name": "phone",
+                  "category_id": 1234
+                }
